@@ -1,22 +1,21 @@
-/*
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #define CAPACITY 100
 #define BUFFER_LENGTH 100
 
-typedef struct person {  // person »ı·« °¡´É
+typedef struct person {  // person ìƒëµ ê°€ëŠ¥
 	char* name;
 	char* number;
 	char* email;
 	char* group;
 }Person;
 
-Person directory[CAPACITY]; // PerosnÅ¸ÀÔÀÇ ¹è¿­ directory ¼±¾ğ
+Person directory[CAPACITY]; // Perosníƒ€ì…ì˜ ë°°ì—´ directory ì„ ì–¸
 int n = 0;
 
 void add_info(char* name, char* number, char* email, char* group) {
-	// Á¤·Ä
+	// ì •ë ¬
 	int i = n - 1;
 	while (i >= 0 && strcmp(directory[i].name, name) > 0) {
 		directory[i + 1] = directory[i];
@@ -31,14 +30,14 @@ void add_info(char* name, char* number, char* email, char* group) {
 	n++;
 }
 
-// Å°º¸µå»Ó¸¸¾Æ´Ï¶ó ÆÄÀÏ·ÎºÎÅÍµµ ÀĞÀ» ¼ö ÀÖµµ·Ï ÇÏ¿´´Ù.
+// í‚¤ë³´ë“œë¿ë§Œì•„ë‹ˆë¼ íŒŒì¼ë¡œë¶€í„°ë„ ì½ì„ ìˆ˜ ìˆë„ë¡ í•˜ì˜€ë‹¤.
 int read_line(FILE* fp, char str[], int n) {
 	int ch, i = 0;
 	while ((ch = fgetc(fp)) != '\n' && ch != EOF) 
 		if (i < n)
 			str[i++] = ch;
 	str[i] = '\0';
-	return i; // ÀÌ¸§ Ã¶ÀÚ °³¼ö ¸®ÅÏ
+	return i; // ì´ë¦„ ì² ì ê°œìˆ˜ ë¦¬í„´
 }
 void load(char* fileName) {
 	char buffer[BUFFER_LENGTH];
@@ -52,7 +51,7 @@ void load(char* fileName) {
 	while (1) {
 		if (read_line(fp, buffer, BUFFER_LENGTH) <= 0)
 			break;
-		name = strtok(buffer, "#");  // ¿©±â¿¡ buffer°ª¿¡ ¹¹°¡ µé¾îÀÖÁö..?¾ğÁ¦µé¾î°¡Áö..?
+		name = strtok(buffer, "#");  // ì—¬ê¸°ì— bufferê°’ì— ë­ê°€ ë“¤ì–´ìˆì§€..?ì–¸ì œë“¤ì–´ê°€ì§€..?
 		number = strtok(NULL, "#");
 		email = strtok(NULL, "#");
 		group = strtok(NULL, "#");
@@ -60,21 +59,21 @@ void load(char* fileName) {
 	}
 	fclose(fp);
 }
-// command_lineÀÇ ³²¾ÆÀÖ´Â ÅäÅ«µéÀ» ¸ğµÎ ÇÕÃÄ ÀÌ¸§À» ³ªÅ¸³»´Â ¹®ÀÚ¿­À» ±¸¼ºÇÑ´Ù.
-// ÅäÅ«°ú ÅäÅ« »çÀÌ¿¡ ÇÏ³ªÀÇ °ø¹é¹®ÀÚ¸¦ »ğÀÔÇÑ´Ù.
+// command_lineì˜ ë‚¨ì•„ìˆëŠ” í† í°ë“¤ì„ ëª¨ë‘ í•©ì³ ì´ë¦„ì„ ë‚˜íƒ€ë‚´ëŠ” ë¬¸ìì—´ì„ êµ¬ì„±í•œë‹¤.
+// í† í°ê³¼ í† í° ì‚¬ì´ì— í•˜ë‚˜ì˜ ê³µë°±ë¬¸ìë¥¼ ì‚½ì…í•œë‹¤.
 
 int compose_name(char str[], int limit) {
 	char* ptr;
 	int length = 0;
 
-	ptr = strtok(NULL, " ");  // µÎ¹øÂ° ÅäÅ«(Ã¹¹øÂ° ÅäÅ«Àº ¸í·É¾îcommand)
-	if (ptr == NULL)  // »ç¶÷ÀÌ¸§ÀÌ ¾ø´Ù´Â ¶æ
+	ptr = strtok(NULL, " ");  // ë‘ë²ˆì§¸ í† í°(ì²«ë²ˆì§¸ í† í°ì€ ëª…ë ¹ì–´command)
+	if (ptr == NULL)  // ì‚¬ëŒì´ë¦„ì´ ì—†ë‹¤ëŠ” ëœ»
 		return 0;
 	strcpy(str, ptr);
 	length += strlen(ptr);
 	
-	while ((ptr == strtok(NULL, " ")) != NULL) {  // ¿À¹öÇÃ·Î¿ì ¹æÁö¿ë
-		if (length + strlen(ptr) + 1 < limit) { // ³Î¹®ÀÚ¶§¹®¿¡ +1
+	while ((ptr == strtok(NULL, " ")) != NULL) {  // ì˜¤ë²„í”Œë¡œìš° ë°©ì§€ìš©
+		if (length + strlen(ptr) + 1 < limit) { // ë„ë¬¸ìë•Œë¬¸ì— +1
 			str[length++] = ' ';
 			str[length] = '\0';
 			strcat(str, ptr);  
@@ -108,7 +107,7 @@ void remove_info(char* name) {
 	}
 	int j = i;
 	for (; j < n - 1; j++) {
-		directory[j] = directory[j + 1];  // ±¸Á¶Ã¼ º¯¼ö°£ÀÇ Ä¡È¯¿¬»êÀÌ Áö¿øµÇ¹Ç·Î ¸â¹öÇ×¸ñµéÀ» µû·Îµû·Î Ä¡È¯ÇÒ ÇÊ¿ä°¡ ¾ø´Ù.
+		directory[j] = directory[j + 1];  // êµ¬ì¡°ì²´ ë³€ìˆ˜ê°„ì˜ ì¹˜í™˜ì—°ì‚°ì´ ì§€ì›ë˜ë¯€ë¡œ ë©¤ë²„í•­ëª©ë“¤ì„ ë”°ë¡œë”°ë¡œ ì¹˜í™˜í•  í•„ìš”ê°€ ì—†ë‹¤.
 	}
 	n--;
 	printf("'%s' was deleted succesfully.\n", name);
@@ -162,12 +161,12 @@ int main() {
 
 	while (1) {
 		printf("$ ");
-		if (read_line(stdin, command_line, BUFFER_LENGTH) <= 0) // ¾Æ¹«ÀÔ·ÂÀÌ ¾øÀ¸¸é 0
+		if (read_line(stdin, command_line, BUFFER_LENGTH) <= 0) // ì•„ë¬´ì…ë ¥ì´ ì—†ìœ¼ë©´ 0
 			continue;
 		command = strtok(command_line, " ");
 
 		if (strcmp(command, "read") == 0) {
-			argument = strtok(NULL, " ");  // µÎ¹øÂ° ÀÎÀÚ ÆÄÀÏ¸í
+			argument = strtok(NULL, " ");  // ë‘ë²ˆì§¸ ì¸ì íŒŒì¼ëª…
 			if (argument == NULL) {
 				printf("Invalid arguments.\n");
 				continue;
@@ -175,7 +174,7 @@ int main() {
 			load(argument);
 		}
 		else if (strcmp(command, "add") == 0) {
-			if (compose_name(name_str, BUFFER_LENGTH) <= 0) { // ÀÌ¸§ÀÌ ÁÖ¾îÁöÁö ¾ÊÀ¸¸é
+			if (compose_name(name_str, BUFFER_LENGTH) <= 0) { // ì´ë¦„ì´ ì£¼ì–´ì§€ì§€ ì•Šìœ¼ë©´
 				printf("Name required.\n");
 				continue;
 			}
@@ -199,12 +198,12 @@ int main() {
 			remove_info(name_str);
 		}
 		else if (strcmp(command, "save") == 0) {
-			argument = strtok(NULL, " ");   // Ã¹¹øÂ° ÀÎÀÚ 'as'
+			argument = strtok(NULL, " ");   // ì²«ë²ˆì§¸ ì¸ì 'as'
 			if (strcmp(argument, "as") != 0) {
 				printf("Invalid arguments.\n");
 				continue;
 			}
-			argument = strtok(NULL, " ");   // µÎ¹øÂ° ÀÎÀÚ ÆÄÀÏ¸í
+			argument = strtok(NULL, " ");   // ë‘ë²ˆì§¸ ì¸ì íŒŒì¼ëª…
 			if (argument == NULL) {
 				printf("Invalid arguments.\n");
 				continue;
@@ -217,4 +216,3 @@ int main() {
 	return 0;
 }
 
-*/
