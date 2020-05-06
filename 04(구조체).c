@@ -51,7 +51,7 @@ void load(char* fileName) {
 	while (1) {
 		if (read_line(fp, buffer, BUFFER_LENGTH) <= 0)
 			break;
-		name = strtok(buffer, "#");  // 여기에 buffer값에 뭐가 들어있지..?언제들어가지..?
+		name = strtok(buffer, "#");  
 		number = strtok(NULL, "#");
 		email = strtok(NULL, "#");
 		group = strtok(NULL, "#");
@@ -59,9 +59,9 @@ void load(char* fileName) {
 	}
 	fclose(fp);
 }
+
 // command_line의 남아있는 토큰들을 모두 합쳐 이름을 나타내는 문자열을 구성한다.
 // 토큰과 토큰 사이에 하나의 공백문자를 삽입한다.
-
 int compose_name(char str[], int limit) {
 	char* ptr;
 	int length = 0;
