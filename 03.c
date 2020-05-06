@@ -5,29 +5,28 @@
 #define CAPACITY 30 
 #define BUFFER_SIZE 50
 
-// void remove(char* name);
-// µ¿Àû ¸Ş¸ğ¸® ÇÒ´çÀ» À§ÇØ ÀÌÂ÷¿ø Æ÷ÀÎÅÍ »ç¿ë
+// ë™ì  ë©”ëª¨ë¦¬ í• ë‹¹ì„ ìœ„í•´ ì´ì¤‘ í¬ì¸í„° ì‚¬ìš©
 char** names;
 char** numbers;
 
-int n = 0; // »ç¶÷ ¼ö
-int capacity = CAPACITY; // ÇöÀç ¹è¿­ÀÇ »çÀÌÁî 
-char delim[] = " "; // strtok ±¸ºĞ¹®ÀÚ
+int n = 0; // ì‚¬ëŒ ìˆ˜
+int capacity = CAPACITY; // í˜„ì¬ ë°°ì—´ì˜ ì‚¬ì´ì¦ˆ 
+char delim[] = " "; // strtok êµ¬ë¶„ë¬¸ì
 
 void delete_info(char* name) {
-	int index = search(name); // »ç¶÷ÀÌ¸§ÀÌ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é return -1
+	int index = search(name); // ì‚¬ëŒì´ë¦„ì´ ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ return -1
 	if (index == -1) {
 		printf("No person named '%s' exists.\n", name);
 		return;
 	}
-	// Á¸ÀçÇÏ¸é
-	int j = index; // »èÁ¦ÇÒ »ç¶÷ ÀÎµ¦½º ¹øÈ£
-	// »èÁ¦ÈÄ ±× ºóÀÚ¸®¸¦ Ã¤¿ì±â À§ÇØ¼­ ¾ÕÀ¸·Î ÇÑÄ­¾¿ ´ç±ä´Ù
+	// ì¡´ì¬í•˜ë©´
+	int j = index; // ì‚­ì œí•  ì‚¬ëŒ ì¸ë±ìŠ¤ ë²ˆí˜¸
+	// ì‚­ì œí›„ ê·¸ ë¹ˆìë¦¬ë¥¼ ì±„ìš°ê¸° ìœ„í•´ì„œ ì•ìœ¼ë¡œ í•œì¹¸ì”© ë‹¹ê¸´ë‹¤
 	for (; j < n - 1; j++) {
 		names[j] = names[j + 1];
 		numbers[j] = numbers[j + 1];
 	}
-	n--; // »èÁ¦ÇßÀ¸´Ï±î »ç¶÷ ¼ö ÁÙ¾îµéÀ½
+	n--; // ì‚­ì œí–ˆìœ¼ë‹ˆê¹Œ ì‚¬ëŒ ìˆ˜ ì¤„ì–´ë“¤ìŒ
 	printf("'%s' was deleted successfully.\n", name);
 }
 
@@ -42,11 +41,11 @@ int search(char* name) {
 
 void reallocate() {
 	capacity *= 2;
-	// Å©±â°¡ 2¹èÀÎ ¹è¿­ ÇÒ´ç
+	// í¬ê¸°ê°€ 2ë°°ì¸ ë°°ì—´ í• ë‹¹
 	char** tmp1 = (char**)malloc(capacity * sizeof(char*));
 	char** tmp2 = (char**)malloc(capacity * sizeof(char*));
 
-	// ¿øº» ¹è¿­ names¿Í numbersÀÇ °ªÀ» »õ·Î¿î ¹è¿­¿¡ ¸ğµÎ º¹»ç
+	// ì›ë³¸ ë°°ì—´ namesì™€ numbersì˜ ê°’ì„ ìƒˆë¡œìš´ ë°°ì—´ì— ëª¨ë‘ ë³µì‚¬
 	for (int i = 0; i < n; i++) {
 		tmp1[i] = names[i];
 		tmp2[i] = numbers[i];
@@ -57,8 +56,8 @@ void reallocate() {
 	free(names);
 	free(numbers);
 
-	// names¿Í numbers°¡ »õ·Î¿î ¹è¿­À» °¡¸®Å°µµ·Ï
-	// (¹è¿­ÀÇ ÀÌ¸§Àº Æ÷ÀÎÅÍ º¯¼öÀÌ´Ù)
+	// namesì™€ numbersê°€ ìƒˆë¡œìš´ ë°°ì—´ì„ ê°€ë¦¬í‚¤ë„ë¡
+	// (ë°°ì—´ì˜ ì´ë¦„ì€ í¬ì¸í„° ë³€ìˆ˜ì´ë‹¤)
 
 	names = tmp1;
     numbers = tmp2;
@@ -67,12 +66,12 @@ void reallocate() {
 }
 
 void add(char *name,char *number) {
-	// ¹è¿­ÀÌ ²ËÂù °æ¿ì ÀçÇÒ´çÇÑ´Ù.
+	// ë°°ì—´ì´ ê½‰ì°¬ ê²½ìš° ì¬í• ë‹¹í•œë‹¤.
 	if (n >= capacity)
 		reallocate();
 
-	// Á¤·Ä ÇÊ¿ä
-	int i = n - 1; // ¸¶Áö¸· »ç¶÷
+	// ì •ë ¬ í•„ìš”
+	int i = n - 1; // ë§ˆì§€ë§‰ ì‚¬ëŒ
 	while (i >= 0 && strcmp(names[i], name) > 0) {
 		names[i + 1] = names[i];
 		numbers[i + 1] = numbers[i];
@@ -104,30 +103,30 @@ void status() {
 }
 
 void load(char *fileName) {
-	// ÆÄÀÏ¿¡ ÀÌ¹Ì Á¤·ÄµÇ¾î ÀÖ´Â »óÅÂ
-	char buf1[BUFFER_SIZE]; // ÀÌ¸§ ÀúÀå
-	char buf2[BUFFER_SIZE]; // ÀüÈ­¹øÈ£ ÀúÀå
+	// íŒŒì¼ì— ì´ë¯¸ ì •ë ¬ë˜ì–´ ìˆëŠ” ìƒíƒœ
+	char buf1[BUFFER_SIZE]; // ì´ë¦„ ì €ì¥
+	char buf2[BUFFER_SIZE]; // ì „í™”ë²ˆí˜¸ ì €ì¥
 
-	FILE* fp = fopen(fileName, "r"); // ÀĞ±â Àü¿ë
-	// ½ÇÆĞ½Ã 
+	FILE* fp = fopen(fileName, "r"); // ì½ê¸° ì „ìš©
+	// ì‹¤íŒ¨ì‹œ 
 	if (fp == NULL) {
 		printf("Open failed.\n");
 		return;
 	}
-	// ¼º°ø½Ã
-	// ÆÄÀÏ ³¡¿¡ µµ´ŞÇÒ ¶§±îÁö ¹İº¹ÇØ¼­ ÀÌ¸§°ú ÀüÈ­¹øÈ£¸¦ ÀĞ¾î¼­ ¹è¿­¿¡ ÀúÀåÇÑ´Ù
+	// ì„±ê³µì‹œ
+	// íŒŒì¼ ëì— ë„ë‹¬í•  ë•Œê¹Œì§€ ë°˜ë³µí•´ì„œ ì´ë¦„ê³¼ ì „í™”ë²ˆí˜¸ë¥¼ ì½ì–´ì„œ ë°°ì—´ì— ì €ì¥í•œë‹¤
 	while ((fscanf(fp, "%s", buf1) != EOF)) {
 		fscanf(fp, "%s", buf2);
 		add(buf1, buf2);
 	}
 
-	fclose(fp); // º¼ÀÏÀÌ ³¡³­ ÆÄÀÏÀº ¹İµå½Ã ´İ¾ÆÁÖ¾î¾ß ÇÑ´Ù
+	fclose(fp); // ë³¼ì¼ì´ ëë‚œ íŒŒì¼ì€ ë°˜ë“œì‹œ ë‹«ì•„ì£¼ì–´ì•¼ í•œë‹¤
 
 }
 void save (char *fileName) {
 
-	FILE* fp = fopen(fileName, "w"); // ¿ø·¡ ±âÁ¸¿¡ ³»¿ëÀÌ ÀÖÀ¸¸é µ¤¾î¾¸
-	// ½ÇÆĞ½Ã 
+	FILE* fp = fopen(fileName, "w"); // ì›ë˜ ê¸°ì¡´ì— ë‚´ìš©ì´ ìˆìœ¼ë©´ ë®ì–´ì”€
+	// ì‹¤íŒ¨ì‹œ 
 	if (fp == NULL) {
 		printf("Open failed.\n");
 		return;
@@ -144,48 +143,48 @@ void init_directory() {
 	numbers = (char**)malloc(CAPACITY * sizeof(char*));
 }
 
-// line ´ÜÀ§ÀÇ ÀÔ·ÂÀº fgets,getlineµîÀÇ ÇÔ¼öµµ ÀÖÁö¸¸ Á÷Á¢ ¸¸µé¾î¼­ ¾²´Â °æ¿ì ¸¹À½.
-// limitº¸´Ù ´õ ±ä lineÀÇ °æ¿ì¿¡´Â µŞºÎºĞÀÌ Â©¸°´Ù.
+// line ë‹¨ìœ„ì˜ ì…ë ¥ì€ fgets,getlineë“±ì˜ í•¨ìˆ˜ë„ ìˆì§€ë§Œ ì§ì ‘ ë§Œë“¤ì–´ì„œ ì“°ëŠ” ê²½ìš° ë§ìŒ.
+// limitë³´ë‹¤ ë” ê¸´ lineì˜ ê²½ìš°ì—ëŠ” ë’·ë¶€ë¶„ì´ ì§¤ë¦°ë‹¤.
 int read_line(char str[], int limit) {
 	int ch, i = 0;
 
-	while ((ch = getchar()) != '\n') // ÁÙ¹Ù²Ş ¹®ÀÚ°¡ ³ª¿Ã¶§±îÁö ÀĞ´Â´Ù.
-		if (i < limit - 1) // ³Î¹®ÀÚ¶§¹®¿¡ -1ÇØÁÜ // ¹è¿­À» ÃÊ°úÇÏÁö ¾ÊÀ» ¶§±îÁö¸¸ ÀĞÀ½.
+	while ((ch = getchar()) != '\n') // ì¤„ë°”ê¿ˆ ë¬¸ìê°€ ë‚˜ì˜¬ë•Œê¹Œì§€ ì½ëŠ”ë‹¤.
+		if (i < limit - 1) // ë„ë¬¸ìë•Œë¬¸ì— -1í•´ì¤Œ // ë°°ì—´ì„ ì´ˆê³¼í•˜ì§€ ì•Šì„ ë•Œê¹Œì§€ë§Œ ì½ìŒ.
 			str[i++] = ch;
-	str[i] = '\0'; // ¸¶Áö¸·¿¡ ³Î¹®ÀÚ Ãß°¡
-	return  i; // ½ÇÁ¦·Î ÀĞÀº ¹®ÀÚ¼ö ¹İÈ¯
+	str[i] = '\0'; // ë§ˆì§€ë§‰ì— ë„ë¬¸ì ì¶”ê°€
+	return  i; // ì‹¤ì œë¡œ ì½ì€ ë¬¸ììˆ˜ ë°˜í™˜
 }
 void process_command() {
-	// ¸í·É ¿¹½Ã : add jamy 1234
-	char command_line[BUFFER_SIZE]; // ¶óÀÎ ´ÜÀ§·Î ÀĞ¾î¿È.
+	// ëª…ë ¹ ì˜ˆì‹œ : add jamy 1234
+	char command_line[BUFFER_SIZE]; // ë¼ì¸ ë‹¨ìœ„ë¡œ ì½ì–´ì˜´.
 	char* command, * argument1, * argument2;
 
 	while (1) {
 		printf("$ ");
 
 		if (read_line(command_line, BUFFER_SIZE) <= 0)
-			continue; // ´Ù½Ã Á¶°ÇÀ¸·Î µ¹¾Æ°¡¼­ $ Ãâ·ÂÇÔ
-		// ±×·¸Áö ¾ÊÀ¸¸é(¹º°¡¸¦ ÀÔ·ÂÇÏ¸é)
+			continue; // ë‹¤ì‹œ ì¡°ê±´ìœ¼ë¡œ ëŒì•„ê°€ì„œ $ ì¶œë ¥í•¨
+		// ê·¸ë ‡ì§€ ì•Šìœ¼ë©´(ë­”ê°€ë¥¼ ì…ë ¥í•˜ë©´)
 		command = strtok(command_line, delim);
-		if (command == NULL)continue;  // Ã¹¹øÂ° ÅäÅ«Àº ¸í·É¾îÀÌ´Ù.
+		if (command == NULL)continue;  // ì²«ë²ˆì§¸ í† í°ì€ ëª…ë ¹ì–´ì´ë‹¤.
 		
 		if (strcmp(command, "read") == 0) {
-			argument1 = strtok(NULL, delim); // read¸í·É¿¡¼­ µÎ¹øÂ° ÅäÅ«Àº ÆÄÀÏ¸íÀÌ´Ù.
+			argument1 = strtok(NULL, delim); // readëª…ë ¹ì—ì„œ ë‘ë²ˆì§¸ í† í°ì€ íŒŒì¼ëª…ì´ë‹¤.
 			if (argument1 == NULL) {
 				printf("File name required.\n");
 				continue;
 			}
-			load(argument1); // ÆÄÀÏ¸íÀ» ÀÎÀÚ·Î ÁÖ¸é¼­ load È£Ãâ
+			load(argument1); // íŒŒì¼ëª…ì„ ì¸ìë¡œ ì£¼ë©´ì„œ load í˜¸ì¶œ
 		}
 		else if (strcmp(command, "add") == 0) {
-			argument1 = strtok(NULL, delim);  // ÀÌ¸§
-			argument2 = strtok(NULL, delim);  // Àü¹ø
+			argument1 = strtok(NULL, delim);  // ì´ë¦„
+			argument2 = strtok(NULL, delim);  // ì „ë²ˆ
 
 			if (argument1 == NULL || argument2 == NULL) {
 				printf("Invalid arguments.\n");
 				continue;
 			}
-			add(argument1, argument2); // Á¤»óÀûÀÌ¸é ÀÌ¸§°ú Àü¹øÀ» ÀÎÀÚ·Î ÁÖ¸é¼­ addÈ£Ãâ
+			add(argument1, argument2); // ì •ìƒì ì´ë©´ ì´ë¦„ê³¼ ì „ë²ˆì„ ì¸ìë¡œ ì£¼ë©´ì„œ addí˜¸ì¶œ
 			printf("%s was added successfully.\n", argument1);
 		}
 		else if (strcmp(command, "find") == 0) {
@@ -208,7 +207,7 @@ void process_command() {
 			status();
 		else if (strcmp(command, "save") == 0) {
 			argument1 = strtok(NULL, delim);  // as
-			argument2 = strtok(NULL, delim);  // ÆÄÀÏ¸í
+			argument2 = strtok(NULL, delim);  // íŒŒì¼ëª…
 
 			if (argument1 == NULL || strcmp("as", argument1) != 0 || argument2 == NULL) {
 				printf("Invalid command format.\n");
@@ -225,8 +224,8 @@ int main() {
 
 	char command[BUFFER_SIZE];
 
-	init_directory();  // ÀÌ ÇÔ¼ö¿¡¼­ ¹è¿­ names¿Í numbers¸¦ »ı¼ºÇÑ´Ù
-	process_command();  // »ç¿ëÀÚÀÇ ¸í·ÉÀ» ¹Ş¾Æ Ã³¸®ÇÏ´Â ºÎºĞÀ» º°°³ÀÇ ÇÔ¼ö·Î ¸¸µé¾ú´Ù
+	init_directory();  // ì´ í•¨ìˆ˜ì—ì„œ ë°°ì—´ namesì™€ numbersë¥¼ ìƒì„±í•œë‹¤
+	process_command();  // ì‚¬ìš©ìì˜ ëª…ë ¹ì„ ë°›ì•„ ì²˜ë¦¬í•˜ëŠ” ë¶€ë¶„ì„ ë³„ê°œì˜ í•¨ìˆ˜ë¡œ ë§Œë“¤ì—ˆë‹¤
 
 	return 0;
 }
