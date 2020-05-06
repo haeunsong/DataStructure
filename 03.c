@@ -60,7 +60,7 @@ void reallocate() {
 	// (배열의 이름은 포인터 변수이다)
 
 	names = tmp1;
-    numbers = tmp2;
+        numbers = tmp2;
 
 
 }
