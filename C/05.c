@@ -28,37 +28,37 @@ void reallocate() {
 	Person** tmp = (Person**)malloc(capacity * sizeof(Person*));
 	for (int i = 0; i < n; i++)
 		tmp[i] = directory[i]; 
-	free(directory);  // free ÇÊ¼ö!!
-	directory = tmp;  // °´Ã¼ÀÇ 'ÁÖ¼Ò'°¡ º¹»çµÇ´Â°ÅÀÓ!!
+	free(directory);  // free í•„ìˆ˜!!
+	directory = tmp;  // ê°ì²´ì˜ 'ì£¼ì†Œ'ê°€ ë³µì‚¬ë˜ëŠ”ê±°ì„!!
 }
 void add_info(char* name, char* number, char* email, char* group) { 
-	// ³Ñ¾î°¡¸é ÀçÇÒ´ç
+	// ë„˜ì–´ê°€ë©´ ì¬í• ë‹¹
 	if (n >= capacity)
 		reallocate();	
-	// Á¤·Ä
+	// ì •ë ¬
 	int i = n - 1;
 
 	while (i >= 0 && strcmp(directory[i]->name, name) > 0) {
 		directory[i + 1] = directory[i]; 
 		i--;
 	}
-	directory[i + 1] = (Person*)malloc(sizeof(Person)); // Áß¿ä!!!
+	directory[i + 1] = (Person*)malloc(sizeof(Person)); // ì¤‘ìš”!!!
 
-	directory[i + 1]->name = _strdup(name);      // strdup ÇÊ¼ö!!!²À!!
+	directory[i + 1]->name = _strdup(name);      // strdup í•„ìˆ˜!!!ê¼­!!
 	directory[i + 1]->number = _strdup(number);
 	directory[i + 1]->email = _strdup(email);
 	directory[i + 1]->group = _strdup(group);
 	n++;
 }
 
-// Å°º¸µå»Ó¸¸¾Æ´Ï¶ó ÆÄÀÏ·ÎºÎÅÍµµ ÀĞÀ» ¼ö ÀÖµµ·Ï ÇÔ
+// í‚¤ë³´ë“œë¿ë§Œì•„ë‹ˆë¼ íŒŒì¼ë¡œë¶€í„°ë„ ì½ì„ ìˆ˜ ìˆë„ë¡ í•¨
 int read_line(FILE* fp, char str[], int n) {
 	int ch, i = 0;
 	while ((ch = fgetc(fp)) != '\n' && ch != EOF)
 		if (i < n)
 			str[i++] = ch;
 	str[i] = '\0';
-	return i; // ÀÌ¸§ Ã¶ÀÚ °³¼ö ¸®ÅÏ
+	return i; // ì´ë¦„ ì² ì ê°œìˆ˜ ë¦¬í„´
 }
 void load(char* fileName) {
 	char buffer[BUFFER_LENGTH];
@@ -85,25 +85,25 @@ void load(char* fileName) {
 		if (strcmp(token, " ") == 0)
 			group = NULL;
 		else group = _strdup(token);
-		add_info(_strdup(name), number, email, group); // ¿ø·¡ add_infoÇÔ¼ö¿¡¼­ dupÇŞ´Âµ¥ ±×³É ¿©±â¼­ ÇØ¹ö¸². ÀÌ¹Ì º¹Á¦µÈ °É ³Ñ±è.
+		add_info(_strdup(name), number, email, group); // ì›ë˜ add_infoí•¨ìˆ˜ì—ì„œ dupí–‡ëŠ”ë° ê·¸ëƒ¥ ì—¬ê¸°ì„œ í•´ë²„ë¦¼. ì´ë¯¸ ë³µì œëœ ê±¸ ë„˜ê¹€.
 	}
 	fclose(fp);
 }
-// command_lineÀÇ ³²¾ÆÀÖ´Â ÅäÅ«µéÀ» ¸ğµÎ ÇÕÃÄ ÀÌ¸§À» ³ªÅ¸³»´Â ¹®ÀÚ¿­À» ±¸¼ºÇÑ´Ù.
-// ÅäÅ«°ú ÅäÅ« »çÀÌ¿¡ ÇÏ³ªÀÇ °ø¹é¹®ÀÚ¸¦ »ğÀÔÇÑ´Ù.
+// command_lineì˜ ë‚¨ì•„ìˆëŠ” í† í°ë“¤ì„ ëª¨ë‘ í•©ì³ ì´ë¦„ì„ ë‚˜íƒ€ë‚´ëŠ” ë¬¸ìì—´ì„ êµ¬ì„±í•œë‹¤.
+// í† í°ê³¼ í† í° ì‚¬ì´ì— í•˜ë‚˜ì˜ ê³µë°±ë¬¸ìë¥¼ ì‚½ì…í•œë‹¤.
 
 int compose_name(char str[], int limit) {
 	char* ptr;
 	int length = 0;
 
-	ptr = strtok(NULL, " ");  // µÎ¹øÂ° ÅäÅ«(Ã¹¹øÂ° ÅäÅ«Àº ¸í·É¾îcommand)
-	if (ptr == NULL)  // »ç¶÷ÀÌ¸§ÀÌ ¾ø´Ù´Â ¶æ
+	ptr = strtok(NULL, " ");  // ë‘ë²ˆì§¸ í† í°(ì²«ë²ˆì§¸ í† í°ì€ ëª…ë ¹ì–´command)
+	if (ptr == NULL)  // ì‚¬ëŒì´ë¦„ì´ ì—†ë‹¤ëŠ” ëœ»
 		return 0;
 	strcpy(str, ptr);
 	length += strlen(ptr);
 
-	while ((ptr == strtok(NULL, " ")) != NULL) {  // ¿À¹öÇÃ·Î¿ì ¹æÁö¿ë
-		if (length + strlen(ptr) + 1 < limit) { // ³Î¹®ÀÚ¶§¹®¿¡ +1
+	while ((ptr == strtok(NULL, " ")) != NULL) {  // ì˜¤ë²„í”Œë¡œìš° ë°©ì§€ìš©
+		if (length + strlen(ptr) + 1 < limit) { // ë„ë¬¸ìë•Œë¬¸ì— +1
 			str[length++] = ' ';
 			str[length] = '\0';
 			strcat(str, ptr);
@@ -117,10 +117,10 @@ void handle_add(char* name) {
 	char empty[] = " ";
 
 	printf("  Phone: ");
-	read_line(stdin, number, BUFFER_LENGTH); // number Ã¶ÀÚ °³¼ö ¸®ÅÏ
+	read_line(stdin, number, BUFFER_LENGTH); // number ì² ì ê°œìˆ˜ ë¦¬í„´
 
 	printf("  Email: ");
-	read_line(stdin, email, BUFFER_LENGTH);  // email Ã¶ÀÚ °³¼ö ¸®ÅÏ
+	read_line(stdin, email, BUFFER_LENGTH);  // email ì² ì ê°œìˆ˜ ë¦¬í„´
 
 	printf("  Group: ");
 	read_line(stdin, group, BUFFER_LENGTH);
@@ -133,7 +133,7 @@ void handle_add(char* name) {
 void release_person(Person* p) {
 
 	free(p->name);
-	if (p->number != NULL) free(p->number); // ³Î°ªÀÎµ¥ ±»ÀÌ ÇØÁ¦½ÃÅ³ ÇÊ¿ä¾øÀ¸´Ï±î if¹® »ç¿ë
+	if (p->number != NULL) free(p->number); // ë„ê°’ì¸ë° êµ³ì´ í•´ì œì‹œí‚¬ í•„ìš”ì—†ìœ¼ë‹ˆê¹Œ ifë¬¸ ì‚¬ìš©
 	if (p->email != NULL) free(p->email);
 	if (p->group != NULL) free(p->group);
 	free(p);
@@ -148,7 +148,7 @@ void remove_info(char* name) {
 	for (int j = i; j < n - 1; j++)
 		directory[j] = directory[j + 1];
 	n--;
-	release_person(p);  // ÀÏºÎ·¯ ÇÔ¼ö¸¦ ¸¸µê. free(p)°¡ ¾ÈµÇ´Â°Ô ¾È¿¡ ÀÖ´Â °ÍµéÀÌ ¸ğµÎ µ¿ÀûÀ¸·Î ÇÒ´çµÇ¾îÀÖ¾î¼­ °¢°¢ ÇØÁ¦ÇØÁà¾ßÇÔ.
+	release_person(p);  // ì¼ë¶€ëŸ¬ í•¨ìˆ˜ë¥¼ ë§Œë“¦. free(p)ê°€ ì•ˆë˜ëŠ”ê²Œ ì•ˆì— ìˆëŠ” ê²ƒë“¤ì´ ëª¨ë‘ ë™ì ìœ¼ë¡œ í• ë‹¹ë˜ì–´ìˆì–´ì„œ ê°ê° í•´ì œí•´ì¤˜ì•¼í•¨.
 	printf("'%s' was deleted successfully.\n",name);
 
 }
@@ -203,19 +203,19 @@ int main() {
 
 	while (1) {
 		printf("$ ");
-		if (read_line(stdin, command_line, BUFFER_LENGTH) <= 0) // ¾Æ¹«ÀÔ·ÂÀÌ ¾øÀ¸¸é 0
+		if (read_line(stdin, command_line, BUFFER_LENGTH) <= 0) // ì•„ë¬´ì…ë ¥ì´ ì—†ìœ¼ë©´ 0
 			continue;
 		command = strtok(command_line, " ");
 
 		if (strcmp(command, "add") == 0) {
-			if (compose_name(name_str, BUFFER_LENGTH) <= 0) { // ÀÌ¸§ÀÌ ÁÖ¾îÁöÁö ¾ÊÀ¸¸é
+			if (compose_name(name_str, BUFFER_LENGTH) <= 0) { // ì´ë¦„ì´ ì£¼ì–´ì§€ì§€ ì•Šìœ¼ë©´
 				printf("Name required.\n");
 				continue;
 			}
 			handle_add(name_str);
 		}
 		else if (strcmp(command, "read") == 0) {
-			argument = strtok(NULL, " ");  // µÎ¹øÂ° ÀÎÀÚ ÆÄÀÏ¸í
+			argument = strtok(NULL, " ");  // ë‘ë²ˆì§¸ ì¸ì íŒŒì¼ëª…
 			if (argument == NULL) {
 				printf("Invalid arguments.\n");
 				continue;
@@ -240,12 +240,12 @@ int main() {
 			remove_info(name_str);
 		}
 		else if (strcmp(command, "save") == 0) {
-			argument = strtok(NULL, " ");   // Ã¹¹øÂ° ÀÎÀÚ 'as'
+			argument = strtok(NULL, " ");   // ì²«ë²ˆì§¸ ì¸ì 'as'
 			if (strcmp(argument, "as") != 0) {
 				printf("Invalid arguments.\n");
 				continue;
 			}
-			argument = strtok(NULL, " ");   // µÎ¹øÂ° ÀÎÀÚ ÆÄÀÏ¸í
+			argument = strtok(NULL, " ");   // ë‘ë²ˆì§¸ ì¸ì íŒŒì¼ëª…
 			if (argument == NULL) {
 				printf("Invalid arguments.\n");
 				continue;
