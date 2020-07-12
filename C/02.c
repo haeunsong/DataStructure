@@ -5,15 +5,15 @@
 
 char* names[CAPACITY];
 char* numbers[CAPACITY];
-int n = 0; // »ç¶÷ ¼ö
+int n = 0; // ì‚¬ëŒ ìˆ˜
 
 void add() {
-	// Á¤·Ä ÇÊ¿ä
+	// ì •ë ¬ í•„ìš”
 	char buf1[BUFFER_SIZE], buf2[BUFFER_SIZE];
-	scanf("%s", buf1); // ÀÌ¸§ ÀúÀå
-	scanf("%s", buf2); // Àü¹ø ÀúÀå
+	scanf("%s", buf1); // ì´ë¦„ ì €ì¥
+	scanf("%s", buf2); // ì „ë²ˆ ì €ì¥
 
-	int i = n - 1; // ¸¶Áö¸· »ç¶÷
+	int i = n - 1; // ë§ˆì§€ë§‰ ì‚¬ëŒ
 	while (i >= 0 && strcmp(names[i], buf1) > 0) {
 		names[i + 1] = names[i];
 		numbers[i + 1] = numbers[i];
@@ -49,12 +49,12 @@ void status() {
 }
 
 void remove() {
-	char buf[BUFFER_SIZE]; // »èÁ¦ÇÒ »ç¶÷ ÀÌ¸§
+	char buf[BUFFER_SIZE]; // ì‚­ì œí•  ì‚¬ëŒ ì´ë¦„
 	scanf("%s", buf);
 	/*
 	for (int i = 0; i < n; i++) {
-		if (strcmp(buf, names[i]) == 0) {  // ¹®ÀÚ¿­À» ºñ±³ÇÏ¿© ÀÏÄ¡ÇÏ¸é(»èÁ¦ÇÒ »ç¶÷À» Ã£À½) 0À» ¹İÈ¯ÇÑ´Ù.
-			// ¸Ç ¸¶Áö¸· »ç¶÷À» »èÁ¦µÈ ÀÚ¸®·Î ¿Å±ä´Ù.
+		if (strcmp(buf, names[i]) == 0) {  // ë¬¸ìì—´ì„ ë¹„êµí•˜ì—¬ ì¼ì¹˜í•˜ë©´(ì‚­ì œí•  ì‚¬ëŒì„ ì°¾ìŒ) 0ì„ ë°˜í™˜í•œë‹¤.
+			// ë§¨ ë§ˆì§€ë§‰ ì‚¬ëŒì„ ì‚­ì œëœ ìë¦¬ë¡œ ì˜®ê¸´ë‹¤.
 			names[i] = names[n - 1];
 			numbers[i] = numbers[n - 1];
 			n--;
@@ -62,49 +62,49 @@ void remove() {
 			return;
 		}
 	}
-	*/ // ÀÌ ¹æ¹ıÀº ÀÌÁ¦ »ç¿ë ºæ°¡(Á¤·ÄÇßÀ¸´Ï±î) 
+	*/ // ì´ ë°©ë²•ì€ ì´ì œ ì‚¬ìš© ë·¸ê°€(ì •ë ¬í–ˆìœ¼ë‹ˆê¹Œ) 
 
-	int index = search(buf); // »ç¶÷ÀÌ¸§ÀÌ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é return -1
+	int index = search(buf); // ì‚¬ëŒì´ë¦„ì´ ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ return -1
 	if (index == -1) {
 		printf("No person named '%s' exists.\n",buf);
 		return;
 	}
-	// Á¸ÀçÇÏ¸é
-	int j = index; // »èÁ¦ÇÒ »ç¶÷ ÀÎµ¦½º ¹øÈ£
-	// »èÁ¦ÈÄ ±× ºóÀÚ¸®¸¦ Ã¤¿ì±â À§ÇØ¼­ ¾ÕÀ¸·Î ÇÑÄ­¾¿ ´ç±ä´Ù
+	// ì¡´ì¬í•˜ë©´
+	int j = index; // ì‚­ì œí•  ì‚¬ëŒ ì¸ë±ìŠ¤ ë²ˆí˜¸
+	// ì‚­ì œí›„ ê·¸ ë¹ˆìë¦¬ë¥¼ ì±„ìš°ê¸° ìœ„í•´ì„œ ì•ìœ¼ë¡œ í•œì¹¸ì”© ë‹¹ê¸´ë‹¤
 	for (; j < n - 1; j++) {
 		names[j] = names[j + 1];
 		numbers[j] = numbers[j + 1];
 	}
-	n--; // »èÁ¦ÇßÀ¸´Ï±î »ç¶÷ ¼ö ÁÙ¾îµéÀ½
+	n--; // ì‚­ì œí–ˆìœ¼ë‹ˆê¹Œ ì‚¬ëŒ ìˆ˜ ì¤„ì–´ë“¤ìŒ
 	printf("'%s' was deleted successfully.\n",buf);
 }
 
 void load() {
-	// ÆÄÀÏ¿¡ ÀÌ¹Ì Á¤·ÄµÇ¾î ÀÖ´Â »óÅÂ
+	// íŒŒì¼ì— ì´ë¯¸ ì •ë ¬ë˜ì–´ ìˆëŠ” ìƒíƒœ
 	char fileName[BUFFER_SIZE];
-	char buf1[BUFFER_SIZE]; // ÀÌ¸§ ÀúÀå
-	char buf2[BUFFER_SIZE]; // ÀüÈ­¹øÈ£ ÀúÀå
+	char buf1[BUFFER_SIZE]; // ì´ë¦„ ì €ì¥
+	char buf2[BUFFER_SIZE]; // ì „í™”ë²ˆí˜¸ ì €ì¥
 
-	// ÆÄÀÏ ÀÌ¸§À» ÀÔ·Â ¹Ş´Â´Ù.
+	// íŒŒì¼ ì´ë¦„ì„ ì…ë ¥ ë°›ëŠ”ë‹¤.
 	scanf("%s", fileName);
 
-	FILE* fp = fopen(fileName, "r"); // ÀĞ±â Àü¿ë
-	// ½ÇÆĞ½Ã 
+	FILE* fp = fopen(fileName, "r"); // ì½ê¸° ì „ìš©
+	// ì‹¤íŒ¨ì‹œ 
 	if (fp == NULL) {
 		printf("Opne failed.\n");
 		return;
 	}
-	// ¼º°ø½Ã
-	// ÆÄÀÏ ³¡¿¡ µµ´ŞÇÒ ¶§±îÁö ¹İº¹ÇØ¼­ ÀÌ¸§°ú ÀüÈ­¹øÈ£¸¦ ÀĞ¾î¼­ ¹è¿­¿¡ ÀúÀåÇÑ´Ù
+	// ì„±ê³µì‹œ
+	// íŒŒì¼ ëì— ë„ë‹¬í•  ë•Œê¹Œì§€ ë°˜ë³µí•´ì„œ ì´ë¦„ê³¼ ì „í™”ë²ˆí˜¸ë¥¼ ì½ì–´ì„œ ë°°ì—´ì— ì €ì¥í•œë‹¤
 	while ((fscanf(fp, "%s", buf1) != EOF)) {
 		fscanf(fp, "%s", buf2);
 		names[n] = _strdup(buf1);
 		numbers[n] = _strdup(buf2);
-		n++; // ÇÑ »ç¶÷ÀÌ Ãß°¡µÇ¾úÀ¸¹Ç·Î 
+		n++; // í•œ ì‚¬ëŒì´ ì¶”ê°€ë˜ì—ˆìœ¼ë¯€ë¡œ 
 	}
 
-	fclose(fp); // º¼ÀÏÀÌ ³¡³­ ÆÄÀÏÀº ¹İµå½Ã ´İ¾ÆÁÖ¾î¾ß ÇÑ´Ù
+	fclose(fp); // ë³¼ì¼ì´ ëë‚œ íŒŒì¼ì€ ë°˜ë“œì‹œ ë‹«ì•„ì£¼ì–´ì•¼ í•œë‹¤
 
 }
 
@@ -112,12 +112,12 @@ void save() {
 	char fileName[BUFFER_SIZE];
 	char tmp[BUFFER_SIZE];
 
-	scanf("%s", tmp); // 'as' ¹®ÀÚ ¹ŞÀ½ 
+	scanf("%s", tmp); // 'as' ë¬¸ì ë°›ìŒ 
 	scanf("%s", fileName);
 
 
-	FILE* fp = fopen(fileName, "w"); // ¿ø·¡ ±âÁ¸¿¡ ³»¿ëÀÌ ÀÖÀ¸¸é µ¤¾î¾¸
-	// ½ÇÆĞ½Ã 
+	FILE* fp = fopen(fileName, "w"); // ì›ë˜ ê¸°ì¡´ì— ë‚´ìš©ì´ ìˆìœ¼ë©´ ë®ì–´ì”€
+	// ì‹¤íŒ¨ì‹œ 
 	if (fp == NULL) {
 		printf("Opne failed.\n");
 		return;
@@ -146,7 +146,7 @@ int main() {
 		printf("$ ");
 		scanf("%s", command);
 
-		if (strcmp(command, "add") == 0) // ÀÏÄ¡ÇÏ¸é 0¹İÈ¯
+		if (strcmp(command, "add") == 0) // ì¼ì¹˜í•˜ë©´ 0ë°˜í™˜
 			add();
 		else if (strcmp(command, "find") == 0)
 			find();
