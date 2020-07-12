@@ -5,7 +5,7 @@
 
 char* names[CAPACITY];
 char* numbers[CAPACITY];
-int n = 0; // »ç¶÷ ¼ö
+int n = 0; // ì‚¬ëžŒ ìˆ˜
 
 void add() {
 	char buf1[BUFFER_SIZE], buf2[BUFFER_SIZE];
@@ -50,8 +50,8 @@ void remove() {
 	scanf("%s", buf);
 
 	for (int i = 0; i < n; i++) {
-		if (strcmp(buf, names[i]) == 0) {  // ¹®ÀÚ¿­À» ºñ±³ÇÏ¿© ÀÏÄ¡ÇÏ¸é(»èÁ¦ÇÒ »ç¶÷À» Ã£À½) 0À» ¹ÝÈ¯ÇÑ´Ù.
-			// ¸Ç ¸¶Áö¸· »ç¶÷À» »èÁ¦µÈ ÀÚ¸®·Î ¿Å±ä´Ù.
+		if (strcmp(buf, names[i]) == 0) {  // ë¬¸ìžì—´ì„ ë¹„êµí•˜ì—¬ ì¼ì¹˜í•˜ë©´(ì‚­ì œí•  ì‚¬ëžŒì„ ì°¾ìŒ) 0ì„ ë°˜í™˜í•œë‹¤.
+			// ë§¨ ë§ˆì§€ë§‰ ì‚¬ëžŒì„ ì‚­ì œëœ ìžë¦¬ë¡œ ì˜®ê¸´ë‹¤.
 			names[i] = names[n - 1];
 			numbers[i] = numbers[n - 1];
 			n--;
@@ -72,7 +72,7 @@ void main() {
 		printf("$ ");
 		scanf("%s", command);
 
-		if (strcmp(command, "add") == 0) // ÀÏÄ¡ÇÏ¸é 0¹ÝÈ¯
+		if (strcmp(command, "add") == 0) // ì¼ì¹˜í•˜ë©´ 0ë°˜í™˜
 			add();
 		else if (strcmp(command, "find") == 0)
 			find();
