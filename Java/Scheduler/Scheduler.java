@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Scheduler {
 	
 	private int capacity = 10;
-	// ¹è¿­ÀÇ °¢ Ä­Àº Event Å¸ÀÔ. ¿©±â¼­ ´ÙÇü¼ºÀÌ Àû¿ëµÈ´Ù.(¼­ºêÅ¬·¡½º°¡ ºÎ¸ğÅ¬·¡½º²¨ »ç¿ë °¡´É)
-	// ¼¼ Á¾·ùÀÇ Å¸ÀÔÀÌ ÀÖ´Ù°í ÇØ¼­ °¢°¢ ´Ù¸¥ ¹è¿­À» ¸¸µéÇÊ¿ä ¾ø°í, ¹­¾î¼­ ÇÒ ¼ö ÀÖ´Ù(ÀÚ¹ÙÀÇ ½ÉÀå!!)(C¿Í ´Ù¸¥Á¡..)
+	// ë°°ì—´ì˜ ê° ì¹¸ì€ Event íƒ€ì…. ì—¬ê¸°ì„œ ë‹¤í˜•ì„±ì´ ì ìš©ëœë‹¤.(ì„œë¸Œí´ë˜ìŠ¤ê°€ ë¶€ëª¨í´ë˜ìŠ¤êº¼ ì‚¬ìš© ê°€ëŠ¥)
+	// ì„¸ ì¢…ë¥˜ì˜ íƒ€ì…ì´ ìˆë‹¤ê³  í•´ì„œ ê°ê° ë‹¤ë¥¸ ë°°ì—´ì„ ë§Œë“¤í•„ìš” ì—†ê³ , ë¬¶ì–´ì„œ í•  ìˆ˜ ìˆë‹¤(ìë°”ì˜ ì‹¬ì¥!!)(Cì™€ ë‹¤ë¥¸ì ..)
 	public Event []events = new Event[capacity];
 	public int n=0;
 	private Scanner kb;
@@ -33,7 +33,7 @@ public class Scheduler {
 				handleShow();
 				
 			}else if(command.equals("sort")) {
-				Arrays.sort(events,0,n);  // Á» ´õ generic ÇÑ.
+				Arrays.sort(events,0,n);  // ì¢€ ë” generic í•œ.
 			}else if(command.equals("exit")) {
 				break;		
 			}
@@ -98,8 +98,8 @@ public class Scheduler {
 	}
 	private void addEvent(Event ev) {
 		if(n>=capacity)
-			reallocate(); // ÀÚ¹Ù¿¡¼­ Á¦°øÇØÁÖ´Â ¸Ş¼­µå Áß ÇÏ³ª!
-		events[n++] = ev; // ¿©±â¼­ ´ÙÇü¼º Àû¿ë!! OneDayEvent Å¸ÀÔÀÇ °´Ã¼¸¦ EventÅ¸ÀÔÀÇ ¹è¿­¿¡ ÀúÀåÇÔ!		
+			reallocate(); // ìë°”ì—ì„œ ì œê³µí•´ì£¼ëŠ” ë©”ì„œë“œ ì¤‘ í•˜ë‚˜!
+		events[n++] = ev; // ì—¬ê¸°ì„œ ë‹¤í˜•ì„± ì ìš©!! OneDayEvent íƒ€ì…ì˜ ê°ì²´ë¥¼ Eventíƒ€ì…ì˜ ë°°ì—´ì— ì €ì¥í•¨!		
 	}
 	private void reallocate() {
 		Event []tmp = new Event[capacity * 2];
