@@ -10,7 +10,7 @@ public class MyDate {
 		month = m;
 		day = d;
 	}
-	// ��¥ ��
+	// ³¯Â¥ ºñ±³
 	public int compareTo(MyDate other) {
 		if(year<other.year || year==other.year && month<other.month
 				|| year == other.year && month == other.month && day<other.day )
